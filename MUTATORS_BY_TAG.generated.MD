@@ -67,6 +67,7 @@
 - [UnnecessarySemicolon](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UnnecessarySemicolon.java)
 - [UseDiamondOperator](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseDiamondOperator.java)
 - [UseDiamondOperatorJdk8](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseDiamondOperatorJdk8.java)
+- [UseExplicitTypes](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseExplicitTypes.java)
 - [UsePredefinedStandardCharset](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UsePredefinedStandardCharset.java)
 - [UseTextBlocks](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseTextBlocks.java)
 
@@ -94,6 +95,10 @@
 - [GuavaImmutableMapBuilderOverVarargs](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/GuavaImmutableMapBuilderOverVarargs.java)
 - [GuavaInlineStringsRepeat](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/GuavaInlineStringsRepeat.java)
 - [GuavaStringsIsNullOrEmpty](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/GuavaStringsIsNullOrEmpty.java)
+
+## ImplicitToExplicit
+
+- [UseExplicitTypes](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseExplicitTypes.java)
 
 ## Import
 
@@ -360,6 +365,7 @@
 ## With JDK 10
 
 - [LocalVariableTypeInference](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/LocalVariableTypeInference.java)
+- [UseExplicitTypes](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseExplicitTypes.java)
 
 ## With JDK 11
 

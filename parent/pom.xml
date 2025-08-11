@@ -437,6 +437,7 @@
 
 							<cleanthat>
 								<sourceJdk>${maven.compiler.source}</sourceJdk>
+								<groupArtifact>org.recordrobotics.cleanthat:java</groupArtifact>
 								<version>${project.version}</version>
 								<mutators>
 									<mutator>SafeAndConsensual</mutator>

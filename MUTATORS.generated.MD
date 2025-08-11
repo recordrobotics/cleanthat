@@ -652,6 +652,14 @@ isDraft
 
 languageLevel: jdk1.8
 
+### [UseExplicitTypes](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UseExplicitTypes.java)
+
+Cleanthat own ID: UseExplicitTypes
+
+isDraft
+
+languageLevel: jdk10
+
 ### [UsePredefinedStandardCharset](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/UsePredefinedStandardCharset.java)
 
 Sonar: [RPSEC-4719](https://rules.sonarsource.com/java/RPSEC-4719)

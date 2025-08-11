@@ -12,6 +12,7 @@ formatters:
   steps:
   - id: "cleanthat"
     parameters:
+      groupArtifact: "org.recordrobotics.cleanthat:java"
       source_jdk: "11.0"
       include_draft: true
       mutators:
