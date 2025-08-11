@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>io.github.solven-eu.cleanthat</groupId>
+		<groupId>org.recordrobotics.cleanthat</groupId>
 		<artifactId>aggregator-cleanthat</artifactId>
 		<version>2.24-SNAPSHOT</version>
 	</parent>
@@ -19,7 +19,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>config</artifactId>
 			<version>${project.version}</version>
 			<exclusions>
@@ -31,7 +31,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>any-language</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -53,7 +53,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>test-helpers</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>

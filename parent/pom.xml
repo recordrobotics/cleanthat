@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<!-- Import dependency management from Spring Boot -->
@@ -13,7 +14,7 @@
 		<!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
 		<relativePath />
 	</parent>
-	<groupId>io.github.solven-eu.cleanthat</groupId>
+	<groupId>org.recordrobotics.cleanthat</groupId>
 	<artifactId>parent</artifactId>
 	<version>2.24-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -46,9 +47,9 @@
 		<maven.compiler.release>11</maven.compiler.release>
 
 		<!-- https://stackoverflow.com/questions/20581427/using-maven-release-plugin-with-github-you-cant-push-to-git-github-com -->
-		<scm.developerConnection>scm:git:ssh://git@github.com/solven-eu/cleanthat.git</scm.developerConnection>
-		<scm.connection>scm:git:ssh://github.com/solven-eu/cleanthat.git</scm.connection>
-		<scm.url>https://github.com/solven-eu/cleanthat</scm.url>
+		<scm.developerConnection>scm:git:ssh://git@github.com/recordrobotics/cleanthat.git</scm.developerConnection>
+		<scm.connection>scm:git:ssh://github.com/recordrobotics/cleanthat.git</scm.connection>
+		<scm.url>https://github.com/recordrobotics/cleanthat</scm.url>
 
 		<!-- https://github.com/solven-eu/pepper/releases -->
 		<pepper.version>4.5</pepper.version>
@@ -352,8 +353,8 @@
 					</executions>
 				</plugin>
 				<plugin>
-					<!-- mvn io.github.solven-eu.cleanthat:cleanthat-maven-plugin:cleanthat -->
-					<groupId>io.github.solven-eu.cleanthat</groupId>
+					<!-- mvn org.recordrobotics.cleanthat:cleanthat-maven-plugin:cleanthat -->
+					<groupId>org.recordrobotics.cleanthat</groupId>
 					<artifactId>cleanthat-maven-plugin</artifactId>
 					<version>2.24-SNAPSHOT</version>
 					<executions>

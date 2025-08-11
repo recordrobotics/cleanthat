@@ -106,6 +106,8 @@ public final class MutatorsScanner {
 							.forName("eu.solven.cleanthat.engine.java.refactorer.mutators.LiteralsFirstInComparisons"),
 					(Class<? extends IMutator>) Class
 							.forName("eu.solven.cleanthat.engine.java.refactorer.mutators.LocalVariableTypeInference"),
+					(Class<? extends IMutator>) Class
+							.forName("eu.solven.cleanthat.engine.java.refactorer.mutators.UseExplicitTypes"),
 					(Class<? extends IMutator>) Class.forName(
 							"eu.solven.cleanthat.engine.java.refactorer.mutators.LoopIntRangeToIntStreamForEach"),
 					(Class<? extends IMutator>) Class
@@ -244,7 +246,8 @@ public final class MutatorsScanner {
 
 	/**
 	 * 
-	 * @return the number of ERRORS which has been logged without failing the process.
+	 * @return the number of ERRORS which has been logged without failing the
+	 *         process.
 	 */
 	@VisibleForTesting
 	public static int getErrorCount() {
@@ -255,7 +258,7 @@ public final class MutatorsScanner {
 	 * The package is not search recursively.
 	 * 
 	 * @param classes
-	 *            The IMutator classes to instantiate
+	 *                The IMutator classes to instantiate
 	 * @return a {@link List} of {@link IMutator} detected in given package.
 	 */
 	public static <T extends IMutator> List<T> instantiate(JavaVersion sourceJdkVersion,
@@ -282,14 +285,12 @@ public final class MutatorsScanner {
 		}
 	}
 
-	@SuppressFBWarnings(value = "MS_EXPOSE_REP",
-			justification = "The internal Set is immutable, so it is safe to expose it")
+	@SuppressFBWarnings(value = "MS_EXPOSE_REP", justification = "The internal Set is immutable, so it is safe to expose it")
 	public static Set<Class<? extends IMutator>> scanSingleMutators() {
 		return SINGLE_MUTATORS;
 	}
 
-	@SuppressFBWarnings(value = "MS_EXPOSE_REP",
-			justification = "The internal Set is immutable, so it is safe to expose it")
+	@SuppressFBWarnings(value = "MS_EXPOSE_REP", justification = "The internal Set is immutable, so it is safe to expose it")
 	public static Set<Class<? extends IMutator>> scanCompositeMutators() {
 		return COMPOSITE_MUTATORS;
 	}

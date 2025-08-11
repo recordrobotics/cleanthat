@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>io.github.solven-eu.cleanthat</groupId>
+		<groupId>org.recordrobotics.cleanthat</groupId>
 		<artifactId>aggregator-cleanthat</artifactId>
 		<version>2.24-SNAPSHOT</version>
 	</parent>
@@ -18,12 +18,12 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>code-providers</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>code-cleaners</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -84,14 +84,14 @@
 			<artifactId>maven-resolver-provider</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>test-helpers</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<!-- Until adding CleanThat as as official Spotless Java step -->
-			<groupId>io.github.solven-eu.cleanthat</groupId>
+			<groupId>org.recordrobotics.cleanthat</groupId>
 			<artifactId>java</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>

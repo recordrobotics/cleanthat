@@ -11,7 +11,7 @@ Beware CleanThat currently refers to 2 sub-projects:
 
 # List of mutators
 
-[![javadoc](https://javadoc.io/badge2/io.github.solven-eu.cleanthat/java/javadoc.svg)](https://javadoc.io/doc/io.github.solven-eu.cleanthat/java)
+[![javadoc](https://javadoc.io/badge2/org.recordrobotics.cleanthat/java/javadoc.svg)](https://javadoc.io/doc/org.recordrobotics.cleanthat/java)
 
 [MUTATORS.generated.MD](MUTATORS.generated.MD)
 
@@ -28,18 +28,18 @@ As of 2022-12, it focuses on Java projects, but enabling formatting various lang
 
 Related projects:
 
-- https://jsparrow.github.io/ (paid)
-- https://github.com/JnRouvignac/AutoRefactor (free)
-- https://github.com/openrewrite/rewrite-migrate-java (free)
-- https://www.moderne.io/ (paid)
-- https://eslint.org/docs/latest/extend/custom-formatters (free)
-- https://errorprone.info/docs/refaster (free)
-- https://github.com/walkmod/walkmod-pmd-plugin (free)
-- https://github.com/XenoAmess/remove-unused-imports-maven-plugin (free, focused on imports)
-- https://github.com/SpoonLabs/sorald (free)
-- https://github.com/redhat-developer/vscode-java/blob/master/document/_java.learnMoreAboutCleanUps.md (free)
+- <https://jsparrow.github.io/> (paid)
+- <https://github.com/JnRouvignac/AutoRefactor> (free)
+- <https://github.com/openrewrite/rewrite-migrate-java> (free)
+- <https://www.moderne.io/> (paid)
+- <https://eslint.org/docs/latest/extend/custom-formatters> (free)
+- <https://errorprone.info/docs/refaster> (free)
+- <https://github.com/walkmod/walkmod-pmd-plugin> (free)
+- <https://github.com/XenoAmess/remove-unused-imports-maven-plugin> (free, focused on imports)
+- <https://github.com/SpoonLabs/sorald> (free)
+- <https://github.com/redhat-developer/vscode-java/blob/master/document/_java.learnMoreAboutCleanUps.md> (free)
 - [Academic papers](https://github.com/SpoonLabs/sorald/issues/82)
-- https://github.com/detekt/detekt (free)
+- <https://github.com/detekt/detekt> (free)
 
 # Changes
 
@@ -86,7 +86,7 @@ see [FormatterFactory](spotless/src/main/java/eu/solven/cleanthat/spotless/Forma
 
 ### Spotless `mvn` plugin (for pure `mvn` users)
 
-`mvn` integration is available through Spotless: https://github.com/diffplug/spotless/tree/main/plugin-maven#cleanthat
+`mvn` integration is available through Spotless: <https://github.com/diffplug/spotless/tree/main/plugin-maven#cleanthat>
 
 [![Maven central](https://img.shields.io/badge/mavencentral-com.diffplug.spotless%3Aspotless--maven--plugin-blue.svg)](https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-maven-plugin)
 
@@ -94,9 +94,9 @@ One can then clean its codebase with `mvn spotless:apply`
 
 ### Cleanthat `mvn` plugin (for GitHub App users)
 
-See README: https://github.com/solven-eu/cleanthat/tree/master/maven
+See README: <https://github.com/solven-eu/cleanthat/tree/master/maven>
 
-![Maven Central](https://img.shields.io/maven-central/v/io.github.solven-eu.cleanthat/java)(https://mvnrepository.com/artifact/io.github.solven-eu.cleanthat/cleanthat-maven-plugin)
+![Maven Central](https://img.shields.io/maven-central/v/org.recordrobotics.cleanthat/java)(<https://mvnrepository.com/artifact/org.recordrobotics.cleanthat/cleanthat-maven-plugin>)
 
 Features :
 
@@ -105,13 +105,13 @@ Features :
 
 One liner (even without a `pom.xml`):
 
-        mvn io.github.solven-eu.cleanthat:cleanthat-maven-plugin:cleanthat
+        mvn org.recordrobotics.cleanthat:cleanthat-maven-plugin:cleanthat
 
 or simply `mvn cleanthat:apply`
 
 ## Gradle (Free)
 
-`gradle` integration is available through Spotless: https://github.com/diffplug/spotless/tree/main/plugin-gradle#cleanthat
+`gradle` integration is available through Spotless: <https://github.com/diffplug/spotless/tree/main/plugin-gradle#cleanthat>
 
 [![Gradle plugin](https://img.shields.io/badge/plugins.gradle.org-com.diffplug.spotless-blue.svg)](https://plugins.gradle.org/plugin/com.diffplug.spotless)
 
@@ -123,15 +123,15 @@ It can configured through a `/.cleanthat/cleanthat.yaml` file at the root of the
 
 It differs from mvn/gradle integration by fetching only relevant (e.g. modified) files, based on Github Events.
 
-- https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types#pullrequestevent
-- https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types#pushevent
+- <https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types#pullrequestevent>
+- <https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types#pushevent>
 
 ### Key Features
 
 - Automatic generation of the initial configuration
 - Clean branches which are not protected and head of a PullRequest
 
-### Example configurations of happy Users:
+### Example configurations of happy Users
 
 - [Cleanthat](https://github.com/solven-eu/cleanthat/tree/master/.cleanthat) itself
 - [Pepper](https://github.com/solven-eu/pepper/tree/master/.cleanthat)
@@ -152,8 +152,8 @@ Spotless:
 
 ```
 cleanthat()
-	[...]
-	.addMutator('SafeAndConsensual')
+[...]
+.addMutator('SafeAndConsensual')
 ```
 
 ## Customizations
@@ -168,11 +168,11 @@ Spotless:
 
 ```
 cleanthat()
-	[...]
-	.addMutator('SafeAndConsensual')
-	.includeMutator('StreamForEachNestingForLoopToFlatMap')
-	.excludeMutator('UseCollectionIsEmpty')
-	.includeDraft(true) 
+[...]
+.addMutator('SafeAndConsensual')
+.includeMutator('StreamForEachNestingForLoopToFlatMap')
+.excludeMutator('UseCollectionIsEmpty')
+.includeDraft(true) 
 ```
 
 ## More composite mutators
@@ -185,9 +185,9 @@ Spotless:
 
 ```
 cleanthat()
-	[...]
-	.addMutator('SafeAndConsensual')
-	.addMutator('SafeButNotConsensual')
+[...]
+.addMutator('SafeAndConsensual')
+.addMutator('SafeButNotConsensual')
 ```
 
 ### [SafeButControversialMutators](java/src/main/java/eu/solven/cleanthat/engine/java/refactorer/mutators/composite/SafeButControversialMutators.java)
@@ -198,10 +198,10 @@ Spotless:
 
 ```
 cleanthat()
-	[...]
-	.addMutator('SafeAndConsensual')
-	.addMutator('SafeButNotConsensual')
-	.addMutator('SafeButControversial')
+[...]
+.addMutator('SafeAndConsensual')
+.addMutator('SafeButNotConsensual')
+.addMutator('SafeButControversial')
 ```
 
 ### Activate **all** mutators
@@ -212,11 +212,11 @@ Spotless:
 
 ```
 cleanthat()
-	[...]
-	.addMutator('SafeAndConsensual')
-	.addMutator('SafeButNotConsensual')
-	.addMutator('SafeButControversial')
-	.includeDraft(true) 
+[...]
+.addMutator('SafeAndConsensual')
+.addMutator('SafeButNotConsensual')
+.addMutator('SafeButControversial')
+.includeDraft(true) 
 ```
 
 # Key design decisions
@@ -240,7 +240,7 @@ Limitations :
 
 ## Github App does not rely on Maven and Gradle
 
-While we work on integrating CleanThat into Spotless, the Github CleanThat App does not rely on existing Maven (https://github.com/diffplug/spotless/tree/main/plugin-maven) and Gradle (https://github.com/diffplug/spotless/tree/main/plugin-gradle) plugins. The main reason for that is security. Indeed, while it would enable very setup over a project already integrating Spotless, it would open dangerous security breach as one could easily inject custom code as dependency of the maven/gradle plugin, which would enable one to extract CleanThat secrets (Github token, GPG key, etc).
+While we work on integrating CleanThat into Spotless, the Github CleanThat App does not rely on existing Maven (<https://github.com/diffplug/spotless/tree/main/plugin-maven>) and Gradle (<https://github.com/diffplug/spotless/tree/main/plugin-gradle>) plugins. The main reason for that is security. Indeed, while it would enable very setup over a project already integrating Spotless, it would open dangerous security breach as one could easily inject custom code as dependency of the maven/gradle plugin, which would enable one to extract CleanThat secrets (Github token, GPG key, etc).
 
 ## About Advanced Formatting of .java files
 
@@ -250,8 +250,8 @@ With github integration, once may rely on CleanThat own .java formatting abiliti
 
 There is multiple good options for formatting Java files:
 
-- https://github.com/revelc/formatter-maven-plugin
-- https://github.com/diffplug/spotless/blob/main/plugin-maven/README.md (e.g. https://github.com/JnRouvignac/AutoRefactor/blob/master/pom.xml#L240)
+- <https://github.com/revelc/formatter-maven-plugin>
+- <https://github.com/diffplug/spotless/blob/main/plugin-maven/README.md> (e.g. <https://github.com/JnRouvignac/AutoRefactor/blob/master/pom.xml#L240>)
 
 # Last considerations
 
@@ -283,7 +283,7 @@ CleanThat will accept only configuration with a single profile in them. If multi
 
 The maven plugin enables generating an Eclipse Stylesheet minimizing changes over a clean repository:
 
-        mvn io.github.solven-eu.cleanthat:cleanthat-maven-plugin:eclipse_formatter-stylesheet
+        mvn org.recordrobotics.cleanthat:cleanthat-maven-plugin:eclipse_formatter-stylesheet
 
 see maven/README.MD
 
@@ -295,4 +295,5 @@ see maven/README.MD
 
 # Contributors
 
-- Thanks[Mark Chesney](https://github.com/mches) for reporting and fixing https://github.com/solven-eu/cleanthat/issues/842 and https://github.com/solven-eu/cleanthat/issues/843
+- Thanks[Mark Chesney](https://github.com/mches) for reporting and fixing <https://github.com/solven-eu/cleanthat/issues/842> and <https://github.com/solven-eu/cleanthat/issues/843>
+
