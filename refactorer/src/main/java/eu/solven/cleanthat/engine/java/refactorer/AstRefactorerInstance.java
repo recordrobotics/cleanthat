@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Benoit Lacelle - SOLVEN
+ * Copyright 2023-2025 Benoit Lacelle - SOLVEN
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,8 @@ class AstRefactorerInstance<AST, P, R> {
 			IWalkingMutator<AST, R> mutator) {
 		var compilationUnit = optCompilationUnit.get();
 		if (compilationUnit == null) {
-			// For any reason, we failed parsing the compilationUnit: do not apply the mutator
+			// For any reason, we failed parsing the compilationUnit: do not apply the
+			// mutator
 			return false;
 		}
 
@@ -89,13 +90,18 @@ class AstRefactorerInstance<AST, P, R> {
 		} catch (RuntimeException | StackOverflowError e) {
 			// StackOverflowError may come from Javaparser
 			// e.g. https://github.com/javaparser/javaparser/issues/3940
-			throw new IllegalArgumentException("Issue with mutator: " + mutator, e);
+			if (mutator.toString().contains("UseExplicitTypes")) {
+				throw e;
+			} else {
+				throw new IllegalArgumentException("Issue with mutator: " + mutator, e);
+			}
 		}
 
 		boolean appliedWithChange;
 
 		if (walkNodeResult.isPresent()) {
-			// Prevent Javaparser polluting the code, as it often impamutators comments when building back code from
+			// Prevent Javaparser polluting the code, as it often impamutators comments when
+			// building back code from
 			// AST,
 			// or removing consecutive EOL
 			LOGGER.debug("IMutator {} linted succesfully {}", mutator.getClass().getSimpleName(), path);
@@ -115,7 +121,8 @@ class AstRefactorerInstance<AST, P, R> {
 				appliedWithChange = false;
 			}
 
-			// Discard cache. It may be useful to prevent issues determining some types in mutated compilationUnits
+			// Discard cache. It may be useful to prevent issues determining some types in
+			// mutated compilationUnits
 			optCompilationUnit.set(null);
 		} else {
 			appliedWithChange = false;

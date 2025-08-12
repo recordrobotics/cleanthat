@@ -15,6 +15,8 @@
  */
 package eu.solven.cleanthat.engine.java.refactorer.mutators;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
@@ -33,6 +36,7 @@ import com.google.common.collect.ImmutableSet;
 import eu.solven.cleanthat.engine.java.IJdkVersionConstants;
 import eu.solven.cleanthat.engine.java.refactorer.AJavaparserNodeMutator;
 import eu.solven.cleanthat.engine.java.refactorer.NodeAndSymbolSolver;
+import eu.solven.cleanthat.engine.java.refactorer.helpers.FailedMutationException;
 import eu.solven.cleanthat.engine.java.refactorer.helpers.MethodCallExprHelpers;
 
 /**
@@ -41,9 +45,10 @@ import eu.solven.cleanthat.engine.java.refactorer.helpers.MethodCallExprHelpers;
  * <p>
  * Opposite of LocalVariableTypeInference.
  * 
- * // Removing duplicate processNotRecursively method
- * 
- * // ThreadLocal to track context for import management
+ * <p>
+ * This mutator enforces explicit types and will throw an {@link IllegalStateException} if any {@code var} declarations
+ * cannot be converted to explicit types. This ensures that no {@code var} declarations are allowed through when the
+ * mutator is applied.
  * 
  * @author Record Robotics
  */
@@ -55,6 +60,9 @@ public class UseExplicitTypes extends AJavaparserNodeMutator {
 
 	// ThreadLocal to track context for import management
 	private static final ThreadLocal<NodeAndSymbolSolver<?>> CURRENT_CONTEXT = new ThreadLocal<>();
+
+	// ThreadLocal to collect failed var conversions for error reporting
+	private static final ThreadLocal<List<String>> FAILED_VAR_CONVERSIONS = new ThreadLocal<>();
 
 	@Override
 	public String minimalJavaVersion() {
@@ -89,6 +97,33 @@ public class UseExplicitTypes extends AJavaparserNodeMutator {
 	}
 
 	@Override
+	@SuppressWarnings("PMD.PrematureDeclaration")
+	public Optional<Node> walkAst(Node ast) {
+		// Initialize the collection for this processing run
+		FAILED_VAR_CONVERSIONS.set(new ArrayList<>());
+		try {
+			// Process the AST normally
+			Optional<Node> result = super.walkAst(ast);
+
+			// Check if any var declarations failed to convert
+			List<String> failedConversions = FAILED_VAR_CONVERSIONS.get();
+			if (failedConversions != null && !failedConversions.isEmpty()) {
+				String errorMessage = String.format(
+						"UseExplicitTypes mutator failed to convert %d var declaration(s) to explicit types. "
+								+ "This violates the explicit types requirement. Failed conversions: %s",
+						failedConversions.size(),
+						String.join(", ", failedConversions));
+				throw new FailedMutationException(errorMessage);
+			}
+
+			return result;
+		} finally {
+			// Clean up ThreadLocal
+			FAILED_VAR_CONVERSIONS.remove();
+		}
+	}
+
+	@Override
 	protected boolean processNotRecursively(NodeAndSymbolSolver<?> node) {
 		CURRENT_CONTEXT.set(node);
 		try {
@@ -112,11 +147,14 @@ public class UseExplicitTypes extends AJavaparserNodeMutator {
 
 			var initializer = singleVariableDeclaration.getInitializer().orElse(null);
 			if (!canReplaceVarWithExplicit(node, initializer)) {
+				// Record this as a failed conversion
+				recordFailedConversion(singleVariableDeclaration, "Cannot replace var with explicit type");
 				return false;
 			}
 
 			Optional<ResolvedType> optResolvedType = MethodCallExprHelpers.optResolvedType(node.editNode(initializer));
 			if (optResolvedType.isEmpty()) {
+				recordFailedConversion(singleVariableDeclaration, "Could not resolve type");
 				return false;
 			}
 
@@ -125,9 +163,12 @@ public class UseExplicitTypes extends AJavaparserNodeMutator {
 				explicitType = buildExplicitType(optResolvedType.get());
 			} catch (UnsolvedSymbolException | IllegalArgumentException e) {
 				LOGGER.debug("Unable to parse explicit type from resolved type: {}", e.getMessage());
+				recordFailedConversion(singleVariableDeclaration, "Unable to parse explicit type: " + e.getMessage());
 				return false;
 			} catch (Exception e) {
 				LOGGER.debug("Unexpected error building explicit type from resolved type", e);
+				recordFailedConversion(singleVariableDeclaration,
+						"Unexpected error building explicit type: " + e.getMessage());
 				return false;
 			}
 
@@ -142,6 +183,32 @@ public class UseExplicitTypes extends AJavaparserNodeMutator {
 			return tryReplace(variableDeclarationExpr, newVariableDeclarationExpr);
 		} finally {
 			CURRENT_CONTEXT.remove();
+		}
+	}
+
+	/**
+	 * Records a failed var conversion for later error reporting.
+	 */
+	private void recordFailedConversion(VariableDeclarator variableDeclarator, String reason) {
+		List<String> failedConversions = FAILED_VAR_CONVERSIONS.get();
+		if (failedConversions != null) {
+			String variableName = variableDeclarator.getName().asString();
+			String location = getLocationDescription(variableDeclarator);
+			String failureDescription = String.format("var %s at %s: %s", variableName, location, reason);
+			failedConversions.add(failureDescription);
+			LOGGER.warn("Failed to convert var declaration: {}", failureDescription);
+		}
+	}
+
+	/**
+	 * Gets a human-readable description of where the variable is located in the code.
+	 */
+	private String getLocationDescription(VariableDeclarator variableDeclarator) {
+		if (variableDeclarator.getRange().isPresent()) {
+			var range = variableDeclarator.getRange().get();
+			return String.format("line %d, col %d", range.begin.line, range.begin.column);
+		} else {
+			return "unknown location";
 		}
 	}
 
